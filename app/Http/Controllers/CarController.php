@@ -15,7 +15,18 @@ class CarController extends Controller
 
     // POST /api/cars - Create a new car
     public function store(Request $request){
-        return Car::create($request->all());
+        //return $request->all();
+        // create new car
+        $current_date = date('Y-m-d', time());
+        $car = new Car();
+        $car->nombre = $request->input('nombre');
+        $car->marca = $request->input('marca');
+        $car->modelo = $request->input('modelo');
+        $car->pais = $request->input('pais');
+        $car->fechaCreate = $current_date;
+        $car->save();
+
+        return $car;
     }
 
     // GET /api/cars/{id} - Retrieve a specific car by ID
