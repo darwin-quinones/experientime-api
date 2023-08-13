@@ -10,7 +10,7 @@ class CarController extends Controller
 
     // GET /api/cars - Retrieve all cars
     public function index() {
-        return Car::all();
+        return Car::paginate(5);
     }
 
     // POST /api/cars - Create a new car
@@ -19,11 +19,11 @@ class CarController extends Controller
         // create new car
         $current_date = date('Y-m-d', time());
         $car = new Car();
-        $car->nombre = $request->input('nombre');
-        $car->marca = $request->input('marca');
-        $car->modelo = $request->input('modelo');
-        $car->pais = $request->input('pais');
-        $car->fechaCreate = $current_date;
+        $car->name = $request->input('name');
+        $car->brand = $request->input('brand');
+        $car->model = $request->input('model');
+        $car->country = $request->input('country');
+        $car->creation_date = $current_date;
         $car->save();
 
         return $car;
@@ -37,7 +37,13 @@ class CarController extends Controller
     // PUT /api/cars/{id} - Update a specific car by ID
     public function update(Request $request, $id){
         $car = Car::findOrFail($id);
-        $car->update($request->all());
+        $current_date = date('Y-m-d', time());
+        $car->name = $request->input('name');
+        $car->brand = $request->input('brand');
+        $car->model = $request->input('model');
+        $car->country = $request->input('country');
+        $car->update_date = $current_date;
+        $car->save();
         return $car;
     }
 

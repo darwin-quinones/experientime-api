@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ExcelReport;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ use App\Http\Controllers\CarController;
 // });
 
 Route::apiResource('cars', CarController::class);
+Route::group(['prefix' => 'reports'], function(){
+    Route::get('generate-cars-excel', [ExcelReport::class, 'generateCarsExcel']);
+});
