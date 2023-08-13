@@ -15,9 +15,8 @@ class ExcelReport extends Controller
 
     public function generateCarsExcel()
     {
+        // get data first
         $data = Car::select('name', 'model', 'brand', 'country', 'creation_date', 'update_date')->get();
-
-        // END DATA
         $mySpreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         // delete the default active sheet
         $mySpreadsheet->removeSheetByIndex(0);
