@@ -21,6 +21,9 @@ use App\Http\Controllers\ExcelReport;
 // });
 
 Route::apiResource('cars', CarController::class);
+Route::group(['prefix' => 'all_cars'], function(){
+    Route::get('all', [CarController::class, 'getAllCars']);
+});
 Route::group(['prefix' => 'reports'], function(){
     Route::get('generate-cars-excel', [ExcelReport::class, 'generateCarsExcel']);
 });
